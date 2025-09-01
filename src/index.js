@@ -1,20 +1,17 @@
-// src/index.js
+// ⿡ Load environment variables *before* anything else executes
+import "dotenv/config";
 
-// 1️⃣ Load .env FIRST before importing anything else
-import dotenv from "dotenv";
-dotenv.config(); 
-
-// 2️⃣ Import the rest of your modules AFTER env vars are loaded
+// ⿢ Now safely import the rest of the application
 import connectDB from "./db/index.js";
 import { app } from "./app.js";
 
-// 3️⃣ Connect to DB and start server
+// ⿣ Connect to DB and start server
 connectDB()
   .then(() => {
     app.listen(process.env.PORT || 8000, () => {
-      console.log(`⚙️ Server is running at port : ${process.env.PORT}`);
+      console.log(`⚙ Server is running at port : ${process.env.PORT}`);
     });
   })
   .catch((err) => {
-    console.error("❌ MONGO DB connection failed !!!", err);
-  });
+    console.error("❌ MONGO DB connection failed !!!", err);
+  });
